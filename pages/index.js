@@ -1,8 +1,27 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { useState } from 'react';
+import Head from 'next/head';
+import styles from '../styles/Home.module.css';
 
-export default function Home() {
-  const nums = Array(10).fill().map(() => ~~(Math.random() * 100));
+const nums = Array(1).fill().map(() => ~~(Math.random() * 100));
+
+const Home = () => {
+
+  const correct = <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/></svg>
+
+  const wrong = <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
+
+  let [binAnswer, setBinAnswer] = useState(0);
+
+  const checkAnswers = (e) => {
+    e.preventDefault();
+    if (binAnswer == nums[0].toString(2)) {
+      console.log("Correct!");
+    }
+    else {
+      console.log("inccorect");
+    }
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,25 +32,36 @@ export default function Home() {
         <h1 className={styles.title}>
           Practice converting numbers
         </h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Decimal</th>
-            <th>Binary</th>
-            <th>Hexadecimal</th>
-            <th>Octal</th>
-          </tr>
-        </thead>
-      {
-        nums.map((num, i) => 
-        <tr key={i}>
-          <td>{num}</td>
-          <td>{num.toString(2)}</td>
-          <td>{num.toString(16).toUpperCase()}</td>
-          <td>{num.toString(8)}</td>
-        </tr>)
-      }
-      </table>
+      <form onSubmit={ checkAnswers }>
+        <table>
+          <thead>
+            <tr>
+              <th>Decimal</th>
+              <th>Binary</th>
+              <th></th>
+              <th>Hexadecimal</th>
+              <th></th>
+              <th>Octal</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+        {
+          nums.map((num, i) => 
+          <tr key={i}>
+            <td>{num}</td>
+            <td><input type="text" name={"bin" + i} onChange={ e => setBinAnswer(e.target.value) }></input></td>
+            <td>{num.toString(2)}</td>
+            <td><input type="text" name={"hex" + i}></input></td>
+            <td>{num.toString(16)}</td>
+            <td><input type="text" name={"oct" + i}></input></td>
+            <td>{num.toString(8)}</td>
+          </tr>)
+        }
+        </tbody>
+        </table>
+        <input type="submit" value="Check"></input>
+      </form>
       </main>
 
       <footer className={styles.footer}>
@@ -39,3 +69,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default Home;
