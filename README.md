@@ -10,10 +10,10 @@ This app is a WIP.
 
 The following features are planned:
 
-- [] _Choose between any type of base_.
-- [] _Choose the number of questions displayed per page_.
-- [] _Show the correct answers if the user answer is wrong_.
-- [] _Explanations on converting between bases_.
+- [ ] _Choose between any type of base_.
+- [ ] _Choose the number of questions displayed per page_.
+- [ ] _Show the correct answers if the user answer is wrong_.
+- [ ] _Explanations on converting between bases_.
 
 Other potential features:
 
