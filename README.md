@@ -17,9 +17,18 @@ Implemented features:
 - [ ] Animated progress bar.
 - [ ] Show the correct answers if the user answer is wrong.
 - [ ] Explanations on converting between bases.
+- [ ] Allow user to change themes.
 
 Other potential features:
 
 - Hex color practice?
 - Algebraic operations on numbers (e.g. _What is 110010\_2 * 8D\_16?_ or _What is 35 - 26\_8?_)?
+
+## Tools Used
+
+- NextJS 10.0.6
+- ReactJS 17.0.1
+- JavaScript 1.7
+- Node 12.19.0
+
 
