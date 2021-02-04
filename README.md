@@ -6,17 +6,20 @@ This is a small app built for practicing the conversion of integers between **bi
 
 This app is a WIP.
 
-## Dev Plan
+## Features
 
-The following features are planned:
+The app will first display a page asking the user how many questions they would like to solve, along with selected the types of bases to be tested on. For example, you could select 10 questions covering conversion only between decimal numbers to binary.
 
-- [ ] _Choose between any type of base_.
-- [ ] _Choose the number of questions displayed per page_.
-- [ ] _Show the correct answers if the user answer is wrong_.
-- [ ] _Explanations on converting between bases_.
+Implemented features:
+
+- [ ] Select the type of conversions to be tested.
+- [ ] Choose the number of questions per quiz.
+- [ ] Animated progress bar.
+- [ ] Show the correct answers if the user answer is wrong.
+- [ ] Explanations on converting between bases.
 
 Other potential features:
 
-- _Hex color practice?_
-- _More to come..._
+- Hex color practice?
+- Algebraic operations on numbers (e.g. _What is 110010\_2 * 8D\_16?_ or _What is 35 - 26\_8?_)
 
