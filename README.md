@@ -21,5 +21,5 @@ Implemented features:
 Other potential features:
 
 - Hex color practice?
-- Algebraic operations on numbers (e.g. _What is 110010\_2 * 8D\_16?_ or _What is 35 - 26\_8?_)
+- Algebraic operations on numbers (e.g. _What is 110010\_2 * 8D\_16?_ or _What is 35 - 26\_8?_)?
 
