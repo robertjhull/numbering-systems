@@ -60,11 +60,11 @@
   color: #4b91a8;
   border-radius: 4px;
   font-size: 1.2rem;
-  transition: color, background-color ease 300ms;
+  transition: color ease 300ms, background-color ease 300ms;
 }
 
 .button:hover {
   background-color: #4b91a8;
-  color:white;
+  color:#eaeaea;
   cursor: pointer;
 }
