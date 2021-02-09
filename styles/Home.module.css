@@ -50,8 +50,12 @@
   background-color:inherit;
   color: #eaeaea;
   border: none;
-  border-bottom: 2px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
   font-size: 1.5rem;
+}
+
+#questioninput:focus {
+  outline: none;
 }
 
 .submit {

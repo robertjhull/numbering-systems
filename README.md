@@ -14,7 +14,7 @@ Implemented features:
 
 - [ ] Select the type of conversions to be tested.
 - [ ] Choose the number of questions per quiz.
-- [ ] Animated progress bar.
+- [x] Animated progress bar.
 - [ ] Show the correct answers if the user answer is wrong.
 - [ ] Explanations on converting between bases.
 - [ ] Allow user to change themes.

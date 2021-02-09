@@ -2,11 +2,13 @@ import { useState } from 'react';
 import Head from 'next/head';
 import styles from '../../styles/Quiz.module.css';
 
-let numbers = Array(10).fill().map(() => ~~(Math.random() * 1000));
+let numbers = Array(10).fill().map(() => ~~(Math.random() * 1000)); // quantity handed in
 let conversions = ["binary", "decimal", "octal", "hex"];
-let base = [2, 10, 8, 16];
+let base = [2, 10, 8, 16]; // handed in
+let bar_fill = 100 / numbers.length;
+let n = 0;
 
-const Quiz = () => {
+const Quiz = props => {
 
   const correct = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="green" class="bi bi-check" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/></svg>`
 
@@ -35,7 +37,13 @@ const Quiz = () => {
       setScore(score - 1);
     }
     document.getElementById("input-answer").value = "";
+    updateProgressBar()
     advanceQuiz();
+  }
+  const updateProgressBar = function() {
+    n += bar_fill;
+    let bar = document.getElementById("fill");
+    bar.style.width = `${n}%`;
   }
 
   const advanceQuiz = function() {
@@ -43,7 +51,7 @@ const Quiz = () => {
       updateConversion();
       setQuestion(question + 1);
     } else {
-      alert("you have reached the end of the quiz!")
+      
     }
   }
 
@@ -53,19 +61,17 @@ const Quiz = () => {
         <title>Base Conversion Practice</title>
       </Head>
       <main className={styles.main}>
-        <div className={styles.progressbar}></div>
-        <h4 className={styles.score}>
-          Score: {score}
-        </h4>
-
         <div className={styles.card}>
-
+          <div className={styles.progressbar}>
+            <span id="fill" className={styles.progressbarfill}></span>
+          </div>
+          <p className={styles.score}>Score: {score}</p>
           <div className={styles.question}>
             <p className={styles.questiontext}>Convert <span className={styles.number}>{numbers[question].toString(base[random1])}</span> from <strong>{conversions[random1]}</strong> to <strong>{conversions[random2]}</strong>.</p>
           </div>
 
           <div className={styles.answer}>
-            <input id="input-answer" type="text" onChange={ e => setAnswer(e.target.value) }></input>
+          <input id="input-answer" className={styles.input}type="text" onChange={ e => setAnswer(e.target.value) }></input>
           </div>
 
           <button onClick={ handleAnswerButtonClick } className={styles.button}>Answer</button>
