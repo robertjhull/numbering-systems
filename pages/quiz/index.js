@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Head from 'next/head';
 import styles from '../../styles/Quiz.module.css';
 
-let numbers = Array(10).fill().map(() => ~~(Math.random() * 100));
+let numbers = Array(10).fill().map(() => ~~(Math.random() * 1000));
 let conversions = ["binary", "decimal", "octal", "hex"];
 let base = [2, 10, 8, 16];
 
@@ -61,7 +61,7 @@ const Quiz = () => {
         <div className={styles.card}>
 
           <div className={styles.question}>
-            <p className={styles.questiontext}>Convert {numbers[question].toString(base[random1])} from <strong>{conversions[random1]}</strong> to <strong>{conversions[random2]}</strong>.</p>
+            <p className={styles.questiontext}>Convert <span className={styles.number}>{numbers[question].toString(base[random1])}</span> from <strong>{conversions[random1]}</strong> to <strong>{conversions[random2]}</strong>.</p>
           </div>
 
           <div className={styles.answer}>
