@@ -19,38 +19,30 @@
 
 .card {
   text-align: center;
-  border: 1px solid #4b91a8;
+  border: 2px solid #4b91a850;
   box-shadow: 1px 1px black;
   background-color:black;
-  color: #eaeaea;
+  color: #c0c0c0;
   padding: 2% 5%;
   border-radius: 5px;
 }
 
-.cardcol {
-  display:flex;
-}
-
-.cardcol .formgroup {
+.formgroup {
   flex-direction: column;
   text-align: left;
-  margin: 0 1rem;
-}
-
-.label {
-  font-size:1.1rem;
-}
-
-.formgroup {
   margin: 1rem auto;
+}
+
+.formgroup:nth-last-of-type(1) {
+  text-align: center;
 }
 
 #questioninput {
   width: 60px;
   background-color:inherit;
-  color: #eaeaea;
+  color: #c0c0c0;
   border: none;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid #c0c0c0;
   font-size: 1.5rem;
 }
 
@@ -60,16 +52,20 @@
 
 .submit {
   background-color:inherit;
-  padding: 2% 4%;
-  border: 1px solid #4b91a8;
-  color:#4b91a8;
+  padding: 3% 5%;
+  border: 1px solid #4b91a850;
+  color:#4b91a850;
   border-radius: 6px;
   font-size: 1.2rem;
   transition: color ease 300ms, background-color ease 300ms, border ease 300ms;
 }
 
 .submit:hover {
-  border: 1px solid #eaeaea;
-  color: #eaeaea;
+  border: 1px solid #4b91a8;
+  color:#4b91a8;
   cursor: pointer;
+}
+
+.submit:focus {
+  outline:none;
 }
