@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## About
 
-This is a small app built for practicing the conversion of integers between **binary**, **base 10**, **base 8**, and **base 16**.
+This is a small app built for practicing the conversion of integers between **binary**, **decimal**, **octal**, and **hexadecimal**.
 
 This app is a WIP.
 
@@ -12,10 +12,10 @@ The app will first display a page asking the user how many questions they would 
 
 Implemented features:
 
-- [ ] Select the type of conversions to be tested.
+- [x] Select the type of conversions to be tested.
 - [x] Choose the number of questions per quiz.
 - [x] Animated progress bar.
-- [ ] Show the correct answers if the user answer is wrong.
+- [x] Show the correct answers if the user answer is wrong.
 - [ ] Explanations on converting between bases.
 - [ ] Allow user to change themes.
 
@@ -23,6 +23,7 @@ Other potential features:
 
 - Hex color practice?
 - Algebraic operations on numbers (e.g. _What is Ob110010 * 0x8D or _What is 35 - 026?_)?
+- Unusual bases? (quaternary, pentoctogesimal, etc.)
 
 ## Tools Used
 
