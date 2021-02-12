@@ -10,11 +10,12 @@ export default function Home() {
 
   useEffect(() => {
     if (start) {
-      const questions = Array(Number(questionAmount)).fill().map(() => ~~(Math.random() * 1000));
+      const questions = Array(Number(questionAmount)).fill().map(() => ~~(Math.random() * slider));
+      const conversions = [binary, octal, decimal, hex];
       router.push({
         pathname: '/quiz',
         query: { 
-          conversions: [2,8,10,16],
+          conversions: conversions,
           questions: questions
         },
       }, '/quiz', {shallow: true})
@@ -23,7 +24,10 @@ export default function Home() {
 
   let [slider, setSlider] = useState(100);
   let [questionAmount, setQuestionAmount] = useState(10);
-  let [conversions, setConversions] = useState([]);
+  let [binary, setBinary] = useState(true);
+  let [octal, setOctal] = useState(true);
+  let [decimal, setDecimal] = useState(true);
+  let [hex, setHex] = useState(true);
 
   return (
     <div className={styles.container}>
@@ -38,27 +42,27 @@ export default function Home() {
               <input type="number" id={styles.questioninput} name="question-amount" defaultValue="10" min="5" max="100" onChange={e => setQuestionAmount(e.target.value)}></input>
             </div>
             <div className={styles.formgroup}>
-              <label htmlFor="question-range">Range:</label><br />
+              <label htmlFor="question-range">Decimal Range:</label><br />
               <input type="number" id={styles.questioninput} name="question-range" defaultValue={slider} min="15" max="1000" readOnly></input>
               <input type="range" min="15" max="1000" defaultValue="100" name="question-range" id="range" className={styles.range} onChange={e => setSlider(e.target.value)}></input>
             </div>
               <div className={styles.formgroup}>
                 <label>Convert Between:</label><br />
                 <div>
-                  <input defaultChecked type="checkbox" name="binary-check"></input>
+                  <input defaultChecked type="checkbox" name="binary-check" onClick={() => setBinary(!binary) }></input>
                   <label htmlFor="binary-check">Binary</label>
                 </div>
                 <div>
-                  <input defaultChecked type="checkbox" name="decimal-check"></input>
-                  <label htmlFor="binary-check">Decimal</label>
+                  <input defaultChecked type="checkbox" name="decimal-check" onClick={() => setDecimal(!decimal) }></input>
+                  <label htmlFor="decimal-check">Decimal</label>
                 </div>
                 <div>
-                  <input defaultChecked type="checkbox" name="octal-check"></input>
-                  <label htmlFor="binary-check">Octal</label>
+                  <input defaultChecked type="checkbox" name="octal-check" onClick={() => setOctal(!octal) }></input>
+                  <label htmlFor="octal-check">Octal</label>
                 </div>
                 <div>
-                  <input defaultChecked type="checkbox" name="hex-check"></input>
-                  <label htmlFor="binary-check">Hex</label>
+                  <input defaultChecked type="checkbox" name="hex-check" onClick={() => setHex(!hex) }></input>
+                  <label htmlFor="hex-check">Hexadecimal</label>
                 </div>
               </div>
             <div className={styles.formgroup}>
