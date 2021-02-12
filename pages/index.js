@@ -14,13 +14,14 @@ export default function Home() {
       router.push({
         pathname: '/quiz',
         query: { 
-          conversions: conversions,
+          conversions: [2,8,10,16],
           questions: questions
         },
       }, '/quiz', {shallow: true})
     }
   }, [start])
 
+  let [slider, setSlider] = useState(100);
   let [questionAmount, setQuestionAmount] = useState(10);
   let [conversions, setConversions] = useState([]);
 
@@ -34,7 +35,12 @@ export default function Home() {
           <div>
             <div className={styles.formgroup}>
               <label htmlFor="question-amount">Number of Questions:</label><br />
-              <input type="number" id={styles.questioninput} name="question-amount" defaultValue="10" onChange={e => setQuestionAmount(e.target.value)}></input>
+              <input type="number" id={styles.questioninput} name="question-amount" defaultValue="10" min="5" max="100" onChange={e => setQuestionAmount(e.target.value)}></input>
+            </div>
+            <div className={styles.formgroup}>
+              <label htmlFor="question-range">Range:</label><br />
+              <input type="number" id={styles.questioninput} name="question-range" defaultValue={slider} min="15" max="1000" readOnly></input>
+              <input type="range" min="15" max="1000" defaultValue="100" name="question-range" id="range" className={styles.range} onChange={e => setSlider(e.target.value)}></input>
             </div>
               <div className={styles.formgroup}>
                 <label>Convert Between:</label><br />

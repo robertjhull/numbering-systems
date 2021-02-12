@@ -8,12 +8,12 @@ This app is a WIP.
 
 ## Features
 
-The app will first display a page asking the user how many questions they would like to solve, along with selected the types of bases to be tested on. For example, you could select 10 questions covering conversion only between decimal numbers to binary.
+The app will first display a page asking the user how many questions they would like to solve, the maximum range of numbers, and types of conversions to be tested on.
 
 Implemented features:
 
 - [ ] Select the type of conversions to be tested.
-- [ ] Choose the number of questions per quiz.
+- [x] Choose the number of questions per quiz.
 - [x] Animated progress bar.
 - [ ] Show the correct answers if the user answer is wrong.
 - [ ] Explanations on converting between bases.

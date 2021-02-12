@@ -46,8 +46,16 @@
   font-size: 1.5rem;
 }
 
+#questioninput:read-only {
+  width: 72px;
+}
+
 #questioninput:focus {
   outline: none;
+}
+
+.range {
+  width:100%;
 }
 
 .submit {
