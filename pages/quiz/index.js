@@ -1,68 +1,89 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { withRouter } from 'next/router';
 import React from 'react';
 import Head from 'next/head';
+import BackButton from '../../components/BackButton';
 import styles from '../../styles/Quiz.module.css';
 
-let conversions = ["binary", "octal", "decimal", "hex"];
-let n = 0;
+const KEYS = {
+  2: "binary", 
+  8: "octal", 
+  10: "decimal", 
+  16: "hexadecimal"
+}
+let width = 0;
 
 const Quiz = props => {
-  let numbers = props.router.query.questions.map(e => Number(e));
-  const bar_fill = 100 / numbers.length;
-  const bases = props.router.query.conversions;
+  const N = props.router.query.questions.map(e => Number(e));
+  const progress = 100 / N.length;
+  const B = [2, 8, 10, 16];
+  let bases = [];
+
+  for (let i = 0; i < B.length; i++) {
+    if (props.router.query.conversions[i] == "true") bases.push(B[i]);
+  }
   
-  let [random1, setRandom1] = useState(1)
-  let [random2, setRandom2] = useState(0)
+  useEffect(() => {
+    updateConversion();
+  }, []);
+
+  let [from, setFrom] = useState();
+  let [to, setTo] = useState();
   let [score, setScore] = useState(0);
   let [question, setQuestion] = useState(0);
   let [answer, setAnswer] = useState();
 
   const handleAnswerButtonClick = function() {
-    let correct = false;
-    if (answer == numbers[question].toString(bases[random2])) {
+    if (answer == N[question].toString(bases[to])) {
+      setInnerHTML("wrong-answer", " ");
+      updateProgressBar(true);
       setScore(score + 1);
-      correct = true;
     } else {
-      document.getElementById("score").innerHTML = "<span style='color:red;'>Incorrect.</span>"
+      setInnerHTML("wrong-answer", N[question].toString(bases[to]))
+      updateProgressBar(false)
     }
     document.getElementById("input-answer").value = "";
-    updateProgressBar(correct)
     advanceQuiz();
   }
 
-  const updateProgressBar = function(a) {
-    n += bar_fill;
+  const updateProgressBar = function(bool) {
+    width += progress;
     let bar = document.getElementById("fill");
-    if (a) bar.style.backgroundColor = `green`;
-    else bar.style.backgroundColor = `red`;
-    bar.style.width = `${n}%`;
+    if (bool) {
+      bar.style.backgroundColor = `green`;
+    } else {
+      bar.style.backgroundColor = `red`;
+    }
+    bar.style.width = `${width}%`;
     setTimeout(function() {
       bar.style.backgroundColor = `#4b91a850`;
     }, 500)
   }
 
   const updateConversion = function() {
-    let r1 = ~~(Math.random() * conversions.length);
-    let r2 = ~~(Math.random() * bases.length);
-    while (r1 === r2) {
-      r2 = ~~(Math.random() * bases.length)
-    }
-    setRandom1(r1);
-    setRandom2(r2)
+    let r1 = ~~(Math.random() * bases.length);
+    let r2;
+    do {
+      r2 = ~~(Math.random() * bases.length);
+    } while (r1 === r2)
+    setFrom(r1);
+    setTo(r2)
   }
 
   const advanceQuiz = function() {
-    if (question + 1 < numbers.length) {
+    if (question + 1 < N.length) {
       updateConversion();
       setQuestion(question + 1);
     } else {
-      console.log(score);
-      document.getElementById("score").innerHTML = `${score}/${numbers.length}`;
-      document.getElementById("buttons").innerHTML = `<a class=Quiz_button__3umvm style="margin:5px;" href="/">Go Back</a>`;
-      document.getElementById("question").innerHTML = `<p>You finished with score of ${(score / numbers.length) * 100}%</p>`;
-      document.getElementById("answer").innerHTML = '';
+      setInnerHTML("score", `${score}/${N.length}`);
+      setInnerHTML("question", `<p>You finished with score of ${(score / N.length) * 100}%</p>`);
+      setInnerHTML("answer", '');
+      setInnerHTML("buttons", `<a class=Quiz_button__3umvm style="margin:5px;" href="/">Go Back</a>`)
     }
+  }
+
+  function setInnerHTML(id, content) {
+    document.getElementById(id).innerHTML = content;
   }
 
   return (
@@ -72,23 +93,25 @@ const Quiz = props => {
       </Head>
       <main className={styles.main}>
         <div className={styles.header}>
-          <a href="/"><svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="#4b91a8" className="bi bi-arrow-left-square" viewBox="0 0 16 16">
-          <path fillRule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-          </svg></a>
+          <BackButton />
         </div>
         <div className={styles.card}>
+          {/* Progress Bar */}
           <div className={styles.progressbar}>
             <span id="fill" className={styles.progressbarfill}></span>
           </div>
+          {/* Score */}
           <p id="score" className={styles.score}></p>
+          {/* Question */}
           <div className={styles.question}>
-            <p id="question" className={styles.questiontext}>Convert <span className={styles.number}>{numbers[question].toString(bases[random1])}</span> from <strong>{conversions[random1]}</strong> to <strong>{conversions[random2]}</strong>.</p>
+            <p id="question" className={styles.questiontext}>Convert <span className={styles.number}>{N[question].toString(bases[from])}</span> from <strong>{KEYS[bases[from]]}</strong> to <strong>{KEYS[bases[to]]}</strong>.</p>
           </div>
-
+          {/* Answer */}
           <div id="answer" className={styles.answer}>
-            <label className={styles.wrong}>1011101</label>
+            <label id="wrong-answer" className={styles.wrong}></label>
             <input id="input-answer" className={styles.input}type="text" onChange={ e => setAnswer(e.target.value) }></input>
           </div>
+          {/* Submit Answer -> Next Question */}
           <div id="buttons" className={styles.buttons}>
             <button onClick={ () => handleAnswerButtonClick() } className={styles.button}>Answer</button>
           </div>
