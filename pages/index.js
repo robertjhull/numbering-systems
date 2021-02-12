@@ -3,12 +3,26 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
-function Home() {
+export default function Home() {
   const router = useRouter();
 
+  let [start, setStart] = useState(false);
+
+  useEffect(() => {
+    if (start) {
+      const questions = Array(Number(questionAmount)).fill().map(() => ~~(Math.random() * 1000));
+      router.push({
+        pathname: '/quiz',
+        query: { 
+          conversions: conversions,
+          questions: questions
+        },
+      }, '/quiz', {shallow: true})
+    }
+  }, [start])
+
   let [questionAmount, setQuestionAmount] = useState(10);
-  let [conversionFrom, setConversionFrom] = useState([]);
-  let [conversionTo, setConversionTo] = useState([]);
+  let [conversions, setConversions] = useState([]);
 
   return (
     <div className={styles.container}>
@@ -17,7 +31,7 @@ function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.card}>
-          <form>
+          <div>
             <div className={styles.formgroup}>
               <label htmlFor="question-amount">Number of Questions:</label><br />
               <input type="number" id={styles.questioninput} name="question-amount" defaultValue="10" onChange={e => setQuestionAmount(e.target.value)}></input>
@@ -42,13 +56,11 @@ function Home() {
                 </div>
               </div>
             <div className={styles.formgroup}>
-              <button className={styles.submit} onClick={ () => router.push("/quiz") }>Generate</button>
+              <button className={styles.submit} onClick={ () => setStart(true) }>Generate</button>
             </div>
-          </form>
+          </div>
         </div>
       </main>
     </div>
   )
 }
-
-export default Home;
