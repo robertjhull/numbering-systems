@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router'; 
 import Head from 'next/head';
+import Theme from '../components/Theme';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
@@ -34,8 +35,9 @@ export default function Home() {
       <Head>
         <title>Base Conversion Practice</title>
       </Head>
+      <Theme />
       <main className={styles.main}>
-        <div className={styles.card}>
+        <div id="card" className={styles.card}>
           <div>
             <div className={styles.formgroup}>
               <label htmlFor="question-amount">Number of Questions:</label><br />
@@ -49,19 +51,19 @@ export default function Home() {
               <div className={styles.formgroup}>
                 <label>Convert Between:</label><br />
                 <div>
-                  <input defaultChecked type="checkbox" name="binary-check" onClick={() => setBinary(!binary) }></input>
+                  <input className={styles.checkbox} defaultChecked type="checkbox" name="binary-check" onClick={() => setBinary(!binary) }></input>
                   <label htmlFor="binary-check">Binary</label>
                 </div>
                 <div>
-                  <input defaultChecked type="checkbox" name="decimal-check" onClick={() => setDecimal(!decimal) }></input>
+                  <input className={styles.checkbox} defaultChecked type="checkbox" name="decimal-check" onClick={() => setDecimal(!decimal) }></input>
                   <label htmlFor="decimal-check">Decimal</label>
                 </div>
                 <div>
-                  <input defaultChecked type="checkbox" name="octal-check" onClick={() => setOctal(!octal) }></input>
+                  <input className={styles.checkbox} defaultChecked type="checkbox" name="octal-check" onClick={() => setOctal(!octal) }></input>
                   <label htmlFor="octal-check">Octal</label>
                 </div>
                 <div>
-                  <input defaultChecked type="checkbox" name="hex-check" onClick={() => setHex(!hex) }></input>
+                  <input className={styles.checkbox} defaultChecked type="checkbox" name="hex-check" onClick={() => setHex(!hex) }></input>
                   <label htmlFor="hex-check">Hexadecimal</label>
                 </div>
               </div>

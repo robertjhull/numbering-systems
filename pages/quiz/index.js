@@ -3,6 +3,7 @@ import { withRouter } from 'next/router';
 import React from 'react';
 import Head from 'next/head';
 import BackButton from '../../components/BackButton';
+import Theme from '../../components/Theme';
 import styles from '../../styles/Quiz.module.css';
 
 const KEYS = {
@@ -11,6 +12,7 @@ const KEYS = {
   10: "decimal", 
   16: "hexadecimal"
 }
+const DEFAULT = [23, 26, 33, 12, 8, 96, 33, 78, 43, 39]
 let width = 0;
 
 const Quiz = props => {
@@ -35,11 +37,9 @@ const Quiz = props => {
 
   const handleAnswerButtonClick = function() {
     if (answer == N[question].toString(bases[to])) {
-      setInnerHTML("wrong-answer", " ");
       updateProgressBar(true);
       setScore(score + 1);
     } else {
-      setInnerHTML("wrong-answer", N[question].toString(bases[to]))
       updateProgressBar(false)
     }
     document.getElementById("input-answer").value = "";
@@ -56,7 +56,7 @@ const Quiz = props => {
     }
     bar.style.width = `${width}%`;
     setTimeout(function() {
-      bar.style.backgroundColor = `#4b91a850`;
+      bar.style.backgroundColor = `#4b91a870`;
     }, 500)
   }
 
@@ -77,7 +77,7 @@ const Quiz = props => {
     } else {
       setInnerHTML("score", `${score}/${N.length}`);
       setInnerHTML("question", `<p>You finished with score of ${(score / N.length) * 100}%</p>`);
-      setInnerHTML("answer", '');
+      document.getElementById("answer").style.display = "none";
       setInnerHTML("buttons", `<a class=Quiz_button__3umvm style="margin:5px;" href="/">Go Back</a>`)
     }
   }
@@ -91,11 +91,10 @@ const Quiz = props => {
       <Head>
         <title>Conversion Practice</title>
       </Head>
+      <BackButton />
+      <Theme />
       <main className={styles.main}>
-        <div className={styles.header}>
-          <BackButton />
-        </div>
-        <div className={styles.card}>
+        <div id="card" className={styles.card}>
           {/* Progress Bar */}
           <div className={styles.progressbar}>
             <span id="fill" className={styles.progressbarfill}></span>
@@ -108,8 +107,7 @@ const Quiz = props => {
           </div>
           {/* Answer */}
           <div id="answer" className={styles.answer}>
-            <label id="wrong-answer" className={styles.wrong}></label>
-            <input id="input-answer" className={styles.input}type="text" onChange={ e => setAnswer(e.target.value) }></input>
+            <input id="input-answer" className={styles.input}type="text" onChange={ e => setAnswer(e.target.value) } autoComplete="off"></input>
           </div>
           {/* Submit Answer -> Next Question */}
           <div id="buttons" className={styles.buttons}>

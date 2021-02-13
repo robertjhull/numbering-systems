@@ -17,13 +17,19 @@
   align-items: center;
 }
 
+.header {
+  position:fixed;
+  top:6px;
+  left:6px;
+  background-color: #000000;
+  transition: background-color 300ms ease-in-out;
+}
+
 .card {
   text-align: center;
-  border: 2px solid #4b91a850;
-  box-shadow: 1px 1px black;
-  background-color:black;
-  color: #c0c0c0;
-  padding: 2% 5%;
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+  border: 2px solid #4b91a860;
+  padding: 1% 5%;
   border-radius: 5px;
 }
 
@@ -40,7 +46,7 @@
 #questioninput {
   width: 60px;
   background-color:inherit;
-  color: #c0c0c0;
+  color: inherit;
   border: none;
   border-bottom: 1px solid #c0c0c0;
   font-size: 1.5rem;
@@ -55,21 +61,22 @@
 }
 
 .range {
+  margin-top: 1em;
   width:100%;
 }
 
 .submit {
   background-color:inherit;
   padding: 3% 5%;
-  border: 1px solid #4b91a850;
-  color:#4b91a850;
+  border: 1.4px solid #4b91a880;
+  color:#4b91a880;
   border-radius: 6px;
   font-size: 1.2rem;
   transition: color ease 300ms, background-color ease 300ms, border ease 300ms;
 }
 
 .submit:hover {
-  border: 1px solid #4b91a8;
+  border: 1.4px solid #4b91a8;
   color:#4b91a8;
   cursor: pointer;
 }
