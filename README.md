@@ -16,14 +16,20 @@ Implemented features:
 - [x] Choose the number of questions per quiz.
 - [x] Animated progress bar.
 - [x] Show the correct answers if the user answer is wrong.
+- [x] Allow user to change themes.
 - [ ] Explanations on converting between bases.
-- [ ] Allow user to change themes.
+- [ ] Quiz results page.
 
 Other potential features:
 
 - Hex color practice?
 - Algebraic operations on numbers (e.g. _What is Ob110010 * 0x8D or _What is 35 - 026?_)?
 - Unusual bases? (quaternary, pentoctogesimal, etc.)
+
+## Known Issues
+
+- Reloading the quiz page will result in an error as the question array will return a value of ```null```.
+- The quiz does not record the final question answer in the score.
 
 ## Tools Used
 
