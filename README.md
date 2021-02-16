@@ -28,7 +28,7 @@ Other potential features:
 
 ## Known Issues
 
-- Reloading the quiz page will result in an error as the question array will return a value of ```null```.
+- ~~Reloading the quiz page will result in an error as the question array will return a value of ```null```.~~ Fixed 2.16.21
 - The quiz does not record the final question answer in the score.
 
 ## Tools Used

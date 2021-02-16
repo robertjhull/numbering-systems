@@ -12,10 +12,14 @@ const KEYS = {
   10: "decimal", 
   16: "hexadecimal"
 }
-const DEFAULT = [23, 26, 33, 12, 8, 96, 33, 78, 43, 39]
 let width = 0;
 
 const Quiz = props => {
+  if (!props.router.query.questions) {
+    props.router.query.questions = Array(10).fill().map(() => ~~(Math.random() * 100));
+    props.router.query.conversions = Array(4).fill("true");
+  }
+
   const N = props.router.query.questions.map(e => Number(e));
   const progress = 100 / N.length;
   const B = [2, 8, 10, 16];
