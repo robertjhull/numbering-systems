@@ -23,7 +23,7 @@ Implemented features:
 Other potential features:
 
 - Hex color practice?
-- Algebraic operations on numbers (e.g. _What is Ob110010 * 0x8D or _What is 35 - 026?_)?
+- Algebraic operations on numbers (e.g. _What is Ob110010 * 0x8D_ or _What is 35 - 026?_)?
 - Unusual bases? (quaternary, pentoctogesimal, etc.)
 
 ## Known Issues
