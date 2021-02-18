@@ -8,7 +8,7 @@ This app is a WIP.
 
 ## Features
 
-The app will first display a page asking the user how many questions they would like to solve, the maximum range of numbers, and types of conversions to be tested on.
+The app first displays a page asking the user how many questions they would like to solve, the maximum range of numbers, and types of conversions to be tested on. After finishing the quiz the user has the option of continuing on to see the graded result, or returning to the index page to generate another quiz.
 
 Implemented features:
 
@@ -17,8 +17,8 @@ Implemented features:
 - [x] Animated progress bar.
 - [x] Show the correct answers if the user answer is wrong.
 - [x] Allow user to change themes.
+- [x] Quiz results page.
 - [ ] Explanations on converting between bases.
-- [ ] Quiz results page.
 
 Other potential features:
 
@@ -28,8 +28,8 @@ Other potential features:
 
 ## Known Issues
 
-- ~~Reloading the quiz page will result in an error as the question array will return a value of ```null```.~~ Fixed 2.16.21
-- The quiz does not record the final question answer in the score.
+- ~~Reloading the quiz page will result in an error as the question array will return a value of ```null```.~~ _fixed 2.16.21_
+- ~~The quiz does not record the final question answer in the score.~~ _fixed 2.18.21_
 
 ## Tools Used
 
