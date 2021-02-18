@@ -75,6 +75,7 @@
   border-radius: 6px;
   font-size: 1.2rem;
   transition: color ease 300ms, background-color ease 300ms, border ease 300ms;
+  margin: 0 5%;
 }
 
 .button:hover {

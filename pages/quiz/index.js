@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { withRouter } from 'next/router';
+import { useRouter, withRouter } from 'next/router';
 import React from 'react';
 import Head from 'next/head';
 import BackButton from '../../components/BackButton';
@@ -15,6 +15,8 @@ const KEYS = {
 let width = 0;
 
 const Quiz = props => {
+  const router = useRouter();
+
   if (!props.router.query.questions) {
     props.router.query.questions = Array(10).fill().map(() => ~~(Math.random() * 100));
     props.router.query.conversions = Array(4).fill("true");
@@ -28,21 +30,33 @@ const Quiz = props => {
   for (let i = 0; i < B.length; i++) {
     if (props.router.query.conversions[i] == "true") bases.push(B[i]);
   }
-  
-  useEffect(() => {
-    updateConversion();
-  }, []);
 
   let [from, setFrom] = useState();
   let [to, setTo] = useState();
-  let [score, setScore] = useState(0);
   let [question, setQuestion] = useState(0);
   let [answer, setAnswer] = useState();
 
+  let [answers, setAnswers] = useState([]);
+  let [convertedFrom, setConvertedFrom] = useState([]);
+  let [convertedTo, setConvertedTo] = useState([]);
+
+  useEffect(() => {
+    updateConversion();
+  }, [question]);
+
   const handleAnswerButtonClick = function() {
+    let r = [...answers];
+    let cF = [...convertedFrom];
+    let cT = [...convertedTo];
+    r.push(answer);
+    cF.push(bases[from]);
+    cT.push(bases[to]);
+    setAnswers(r);
+    setConvertedTo(cT);
+    setConvertedFrom(cF);
+
     if (answer == N[question].toString(bases[to])) {
       updateProgressBar(true);
-      setScore(score + 1);
     } else {
       updateProgressBar(false)
     }
@@ -76,14 +90,27 @@ const Quiz = props => {
 
   const advanceQuiz = function() {
     if (question + 1 < N.length) {
-      updateConversion();
       setQuestion(question + 1);
     } else {
-      setInnerHTML("score", `${score}/${N.length}`);
-      setInnerHTML("question", `<p>You finished with score of ${(score / N.length) * 100}%</p>`);
+      setInnerHTML("question", `<p>Finished! Click "Results" to see your grade or "Go Back" to generate another quiz.</p>`);
       document.getElementById("answer").style.display = "none";
-      setInnerHTML("buttons", `<a class=Quiz_button__3umvm style="margin:5px;" href="/">Go Back</a>`)
+      document.getElementsByClassName("button-answer")[0].style.display = "none";
+      for (let button of document.getElementsByClassName("button-finish")) {
+        button.style.display = "inline-block";
+      }
     }
+  }
+
+  const viewResults = function() {
+    router.push({
+      pathname: '/quiz/results',
+      query: {
+        questions: N,
+        convertedTo: convertedTo,
+        convertedFrom: convertedFrom,
+        answers: answers
+      },
+    }, '/quiz/results', {shallow: true})
   }
 
   function setInnerHTML(id, content) {
@@ -98,13 +125,11 @@ const Quiz = props => {
       <BackButton />
       <Theme />
       <main className={styles.main}>
-        <div id="card" className={styles.card}>
+        <div className={`${styles.card} ${'theme'}`}>
           {/* Progress Bar */}
           <div className={styles.progressbar}>
             <span id="fill" className={styles.progressbarfill}></span>
           </div>
-          {/* Score */}
-          <p id="score" className={styles.score}></p>
           {/* Question */}
           <div className={styles.question}>
             <p id="question" className={styles.questiontext}>Convert <span className={styles.number}>{N[question].toString(bases[from])}</span> from <strong>{KEYS[bases[from]]}</strong> to <strong>{KEYS[bases[to]]}</strong>.</p>
@@ -115,7 +140,9 @@ const Quiz = props => {
           </div>
           {/* Submit Answer -> Next Question */}
           <div id="buttons" className={styles.buttons}>
-            <button onClick={ () => handleAnswerButtonClick() } className={styles.button}>Answer</button>
+            <button onClick={ () => router.push('/') } className={`${styles.button} ${"button-finish"}`} style={{display:'none'}}>Go Back</button>
+            <button onClick={ () => handleAnswerButtonClick() } className={`${styles.button} ${"button-answer"}`}>Answer</button>
+            <button onClick={ () => viewResults() } className={`${styles.button} ${"button-finish"}`} style={{display:'none'}}>Results</button>
           </div>
         </div>
       </main>

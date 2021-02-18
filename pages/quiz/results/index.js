@@ -8,16 +8,23 @@ import styles from '../../../styles/Results.module.css';
 
 function Results(props) {
     return (
-        <>
+        <div className={styles.container}>
             <Head>
                 <title>Base Conversion Practice</title>
             </Head>
             <BackButton />
             <Theme />
-            <div className={styles.card}>
-                <AnswerKey />
-            </div>
-        </>
+            <main className={styles.main}>
+                <div className={`${styles.card} ${'theme'}`}>
+                    <AnswerKey 
+                        questions={props.router.query.questions}
+                        convertFrom={props.router.query.convertedFrom}
+                        convertTo={props.router.query.convertedTo}
+                        answers={props.router.query.answers}
+                    />
+                </div>
+            </main>
+        </div>
     )
 }
 

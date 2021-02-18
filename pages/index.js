@@ -37,7 +37,7 @@ export default function Home() {
       </Head>
       <Theme />
       <main className={styles.main}>
-        <div id="card" className={styles.card}>
+        <div className={`${styles.card} ${'theme'}`}>
           <div>
             <div className={styles.formgroup}>
               <label htmlFor="question-amount">Number of Questions:</label><br />
