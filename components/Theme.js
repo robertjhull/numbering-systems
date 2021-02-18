@@ -17,32 +17,28 @@ export default function Theme() {
 
     const toggleTheme = function() {
         let body = document.getElementsByTagName("BODY")[0];
-        let header = document.getElementById("header");
-        let back = document.getElementById("back-button")
-        let card = document.getElementById("card");
-        let on = document.getElementById("icon-on");
-        let off = document.getElementById("icon-off");
-        if (lightMode) {
-            for (let element of [body, header, card]) {
+        let theme = document.getElementsByClassName("theme");
+        let on = document.getElementById("icon-on").style;
+        let off = document.getElementById("icon-off").style;
+        for (let element of [...theme, body]) {
+            if (lightMode) {
                 element.style.backgroundColor = "#eaeaea";
-            }
-            if (back) back.style.backgroundColor = "#eaeaea";
-            on.style.display = "inline-block";
-            off.style.display = "none";
-            card.style.color = '#000000';
-
-        } else {
-            for (let element of [body, header, card]) {
+                element.style.color='#000000';
+            } else {
                 element.style.backgroundColor = "#000000";
+                element.style.color='#c0c0c0';
             }
-            if (back) back.style.backgroundColor = "#000000";
-            off.style.display = "inline-block";
-            on.style.display = "none";
-            card.style.color = '#c0c0c0';
+        }
+        if (lightMode) {
+            on.display = 'inline-block';
+            off.display = 'none';
+        } else {
+            on.display = 'none';
+            off.display = 'inline-block';
         }
     }
     return (
-        <div id="header" className={styles.header}>
+        <div className={`${styles.header} ${'theme'}`}>
           <label className={styles.switch}>
             <input className={styles.toggle} type="checkbox" onClick={ () => setLightMode(!lightMode) }></input>
             <span className={styles.slider}></span>
