@@ -15,7 +15,7 @@ export default function Home() {
       const conversions = [binary, octal, decimal, hex];
       router.push({
         pathname: '/quiz',
-        query: { 
+        query: {
           conversions: conversions,
           questions: questions
         },
@@ -39,34 +39,38 @@ export default function Home() {
       <main className={styles.main}>
         <div className={`${styles.card} ${'theme'}`}>
           <div>
+            {/* Set number of questions */}
             <div className={styles.formgroup}>
               <label htmlFor="question-amount">Number of Questions:</label><br />
               <input type="number" id={styles.questioninput} name="question-amount" defaultValue="10" min="5" max="100" onChange={e => setQuestionAmount(e.target.value)}></input>
             </div>
+            {/* Set range */}
             <div className={styles.formgroup}>
               <label htmlFor="question-range">Decimal Range:</label><br />
               <input type="number" id={styles.questioninput} name="question-range" defaultValue={slider} min="15" max="1000" readOnly></input>
               <input type="range" min="15" max="1000" defaultValue="100" name="question-range" id="range" className={styles.range} onChange={e => setSlider(e.target.value)}></input>
             </div>
-              <div className={styles.formgroup}>
-                <label>Convert Between:</label><br />
-                <div>
-                  <input className={styles.checkbox} defaultChecked type="checkbox" name="binary-check" onClick={() => setBinary(!binary) }></input>
-                  <label htmlFor="binary-check">Binary</label>
-                </div>
-                <div>
-                  <input className={styles.checkbox} defaultChecked type="checkbox" name="decimal-check" onClick={() => setDecimal(!decimal) }></input>
-                  <label htmlFor="decimal-check">Decimal</label>
-                </div>
-                <div>
-                  <input className={styles.checkbox} defaultChecked type="checkbox" name="octal-check" onClick={() => setOctal(!octal) }></input>
-                  <label htmlFor="octal-check">Octal</label>
-                </div>
-                <div>
-                  <input className={styles.checkbox} defaultChecked type="checkbox" name="hex-check" onClick={() => setHex(!hex) }></input>
-                  <label htmlFor="hex-check">Hexadecimal</label>
-                </div>
+            {/* Select which conversions to test */}
+            <div className={styles.formgroup}>
+              <label>Convert Between:</label><br />
+              <div>
+                <input className={styles.checkbox} defaultChecked type="checkbox" name="binary-check" onClick={() => setBinary(!binary) }></input>
+                <label htmlFor="binary-check">Binary</label>
               </div>
+              <div>
+                <input className={styles.checkbox} defaultChecked type="checkbox" name="decimal-check" onClick={() => setDecimal(!decimal) }></input>
+                <label htmlFor="decimal-check">Decimal</label>
+              </div>
+              <div>
+                <input className={styles.checkbox} defaultChecked type="checkbox" name="octal-check" onClick={() => setOctal(!octal) }></input>
+                <label htmlFor="octal-check">Octal</label>
+              </div>
+              <div>
+                <input className={styles.checkbox} defaultChecked type="checkbox" name="hex-check" onClick={() => setHex(!hex) }></input>
+                <label htmlFor="hex-check">Hexadecimal</label>
+              </div>
+            </div>
+            {/* Set number of questions */}
             <div className={styles.formgroup}>
               <button className={styles.submit} onClick={ () => setStart(true) }>Generate</button>
             </div>

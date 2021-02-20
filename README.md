@@ -20,16 +20,11 @@ Implemented features:
 - [x] Quiz results page.
 - [ ] Explanations on converting between bases.
 
-Other potential features:
-
-- Hex color practice?
-- Algebraic operations on numbers (e.g. _What is Ob110010 * 0x8D_ or _What is 35 - 026?_)?
-- Unusual bases? (quaternary, pentoctogesimal, etc.)
-
 ## Known Issues
 
 - ~~Reloading the quiz page will result in an error as the question array will return a value of ```null```.~~ _fixed 2.16.21_
 - ~~The quiz does not record the final question answer in the score.~~ _fixed 2.18.21_
+- Theme choice does not persist between pages.
 
 ## Tools Used
 
