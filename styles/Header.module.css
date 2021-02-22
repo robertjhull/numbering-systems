@@ -3,25 +3,28 @@
     width: 100%;
     height: 60px;
     top:0;
-    background-color: #000;
-    border-bottom: 1.4px solid #4b91a880;
 }
 
 .navbar {
     display: flex;
     flex-direction: row;
-    justify-content: left;
-    align-items: center;
+    text-align: right;
 }
 
 @media screen and (min-width: 601px) {
     .navbar {
-        width: 50%;
+        width: 100%;
+    }
+    .navbar ul li {
+        margin: 0 2%;
     }
   }
 @media screen and (max-width: 600px) {
     .navbar {
         width: 100%;
+    }
+    .navbar ul li {
+        margin: 0 5%;
     }
 }
 
@@ -33,8 +36,8 @@
 
 .navbar ul li {
     display: inline-block;
-    margin: 0 5%;
     font-size: 1.2em;
+    text-shadow: 1px 1px #000;
 }
 
 .navbar ul li a {

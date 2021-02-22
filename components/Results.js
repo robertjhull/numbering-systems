@@ -10,14 +10,13 @@ export default function Results(props) {
         10: "DEC", 
         16: "HEX"
     }
-    if (props.questions) {
-        const questions = props.questions.map(e => Number(e));
-        const convertFrom = props.convertFrom.map(e => Number(e));
-        const convertTo = props.convertTo.map(e => Number(e));
-        setLoaded(true);
-    }
+
     let [score, setScore] = useState(0);
     let [loaded, setLoaded] = useState(false);
+
+    const questions = props.questions.map(e => Number(e));
+    const convertFrom = props.convertFrom.map(e => Number(e));
+    const convertTo = props.convertTo.map(e => Number(e));
 
     const grade = function() {
         let result = 0;
@@ -43,10 +42,10 @@ export default function Results(props) {
 
     return (
         <>
-            {loaded && render(<p className={styles.heading}>Final Score: {(score / questions.length) * 100}% <span className={styles.sub}>({score}/{questions.length})</span></p>)}
+            <p className={styles.heading}>Final Score: {(score / questions.length) * 100}% <span className={styles.sub}>({score}/{questions.length})</span></p>
             <table>
                 <tbody>
-                    {loaded && props.answers.map((answer, key) => 
+                    {props.answers.map((answer, key) => 
                         <tr key={key} className={'answer-key-row'}>
                             <td className={styles.questionCol}>
                                 <span className={styles.sub}>

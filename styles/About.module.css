@@ -5,4 +5,32 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
+}
+
+.about {
+  text-align: left;
+  margin: 0 5%;
+}
+
+.aboutheader {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.aboutlink {
+  color: #4b91a880;
+}
+
+.aboutlink:hover {
+  color: #4b91a8;
+}
+
+.code {
+  font-style:italic;
+}
+
+.list {
+  list-style:square;
+  text-align:left;
+  margin-left: 5%;
+}

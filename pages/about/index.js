@@ -1,9 +1,10 @@
 import Head from 'next/head';
 import Main from '../../components/Main';
 import Header from '../../components/Header';
+import About from '../../components/About';
 import styles from '../../styles/About.module.css';
 
-export default function About() {
+export default function AboutPage() {
   return (
     <div className={styles.container}>
       <Head>
@@ -11,7 +12,7 @@ export default function About() {
       </Head>
       <Header />
       <Main>
-        <p>Explanation of this app goes here</p>
+        <About />
       </Main>
     </div>
   )

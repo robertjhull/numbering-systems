@@ -21,9 +21,10 @@ export default function Quiz(props) {
 
     const N = props.content.questions.map(e => Number(e));
     const progress = 100 / N.length;
-    const B = [2, 8, 10, 16];
+    
+    // Constructing array of bases for random selection based off of user choices.
     let bases = [];
-
+    const B = [2, 8, 10, 16];
     for (let i = 0; i < B.length; i++) {
         if (props.content.conversions[i] == "true") bases.push(B[i]);
     }
@@ -39,6 +40,7 @@ export default function Quiz(props) {
     let [convertedFrom, setConvertedFrom] = useState([]);
     let [convertedTo, setConvertedTo] = useState([]);
 
+    // Handles "Answer" button click.
     const handleAnswerButtonClick = function() {
         setAnswers([...answers, answer]);
         setConvertedTo([...convertedTo, bases[to]]);
@@ -50,9 +52,11 @@ export default function Quiz(props) {
             updateProgressBar(false)
         }
         document.getElementById("input-answer").value = "";
+        setAnswer(null);
         advanceQuiz();
     }
 
+    // Update the progress bar.
     const updateProgressBar = function(bool) {
         width += progress;
         let bar = document.getElementById("fill");
@@ -67,6 +71,7 @@ export default function Quiz(props) {
         }, 500)
     }
 
+    // Update random numbers.
     const updateConversion = function() {
         let r1 = ~~(Math.random() * bases.length);
         let r2 = ~~(Math.random() * bases.length);
@@ -77,6 +82,7 @@ export default function Quiz(props) {
         setTo(r2)
     }
 
+    // Increment question number unless at the end of the quiz.
     const advanceQuiz = function() {
         if (question + 1 < N.length) {
             setQuestion(question + 1);
@@ -85,7 +91,8 @@ export default function Quiz(props) {
             toggleDisplay([["answer", false], ["button-answer", false], ["button-results", true]]);
         }
     }
-
+    
+    // Route to /quiz/results page on "Finish" button press.
     const viewResults = function() {
         router.push({
             pathname: '/quiz/results',
@@ -98,10 +105,10 @@ export default function Quiz(props) {
         }, '/quiz/results', {shallow: true})
     }
 
+    // Helper functions.
     function setInnerHTML(id, content) {
         document.getElementById(id).innerHTML = content;
     }
-
     function toggleDisplay(elements) {
         elements.forEach(function(e) {
             let visibility = "none";
@@ -110,6 +117,7 @@ export default function Quiz(props) {
         })
     }
 
+    // Update the random numbers each time the quiz advances.
     useEffect(() => {
         updateConversion();
     }, [question]);
