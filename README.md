@@ -1,30 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). The app tests your knowledge on converting numbers between **binary**, **decimal**, **octal**, and **hexadecimal** numbering systems.
 
-## About
+## Pages
 
-This is a small app built for practicing the conversion of integers between **binary**, **decimal**, **octal**, and **hexadecimal**.
+`/`
+- The starting page where users can select the parameters to be tested on (question amount, decimal range, and types of bases).
 
-This app is a WIP.
+`/about`
+- Page detailing all the features of the app.
 
-## Features
+`/quiz`
+- The quiz takes the list of generated numbers and questions the user on randomly selected conversion types for each number. The progress bar shows the percentage progress and flashes red or green depending on whether the answer is correct.
 
-The app first displays a page asking the user how many questions they would like to solve, the maximum range of numbers, and types of conversions to be tested on. After finishing the quiz the user has the option of continuing on to see the graded result, or returning to the index page to generate another quiz.
-
-Implemented features:
-
-- [x] Select the type of conversions to be tested.
-- [x] Choose the number of questions per quiz.
-- [x] Animated progress bar.
-- [x] Show the correct answers if the user answer is wrong.
-- [x] Allow user to change themes.
-- [x] Quiz results page.
-- [ ] Explanations on converting between bases.
-
-## Known Issues
-
-- ~~Reloading the quiz page will result in an error as the question array will return a value of ```null```.~~ _fixed 2.16.21_
-- ~~The quiz does not record the final question answer in the score.~~ _fixed 2.18.21_
-- Theme choice does not persist between pages.
+`/quiz/results`
+- Here you can see the full list of questions as well as your own answers compared to the correct ones.
 
 ## Tools Used
 

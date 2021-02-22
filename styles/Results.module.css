@@ -5,35 +5,26 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-  
-.main {
-    padding: 5rem 0;
-    flex: 1;
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
-.card {
-    text-align: center;
-    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
-    border: 2px solid #4b91a860;
-    color: #c0c0c0;
-    padding: 2% 5%;
-    border-radius: 5px;
-}
-
-.convertarrow {
-    padding-right: 80px;
+.heading {
+    font-size:1.4em;
+    margin: 2%;
 }
 
 .sub {
     font-size: .7em;
 }
 
-.useranswer {
-    padding:1.4em 20px 0 60px;
+.convertArrowCol {
+    padding-left: 10px;
+    padding-right: 40px;
+}
+
+.userAnswerCol {
+    padding:1.4em 0 0 40px;
+}
+
+.buttons {
+    margin: 5%;
 }
