@@ -1,8 +1,13 @@
 import '../styles/globals.css';
+import Header from '../components/Header';
+import Main from '../components/Main';
 
 function MyApp({ Component, pageProps }) {
   return <>
-    <Component {...pageProps} />
+    <Header />
+    <Main>
+      <Component {...pageProps} />
+    </Main>
   </>
 }
 

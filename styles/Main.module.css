@@ -1,38 +1,89 @@
-.main {
-    padding: 5rem 0;
-    flex: 1;
-    width: 60%;
+.container {
+    padding: 0 0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
+.main {
+    padding: 5rem 0;
+    flex: 1;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
   
 .card {
     text-align: center;
-    border: 2px solid #4b91a860;
-    background-color: #000;
-    color: #c0c0c0;
-    padding: 2%;
+    padding: 1% 2%;
+    border: 2px solid #00000050;
+    background-color: #fff;
+    color: #000;
     border-radius: 5px;
     transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
 }
 
 @media screen and (min-width: 601px) {
     .card {
-        min-width:40%;
-        max-width: 60%;
-    }
-    .main {
-        width: 60%;
+        max-width:35%;
     }
   }
 @media screen and (max-width: 600px) {
     .card {
-        min-width:60%;
-        max-width: 80%;
+        width: 65%;
     }
-    .main {
-        width: 90%;
-    }
+}
+
+.formgroup {
+    flex-direction: column;
+    text-align: left;
+    margin: 1rem auto;
+}
+
+.formgroup:nth-last-of-type(1) {
+    text-align: center;
+}
+
+#questioninput {
+    width: 60px;
+    background-color:inherit;
+    color: inherit;
+    border: none;
+    border-bottom: 1px solid #c0c0c0;
+    font-size: 1.5rem;
+}
+
+#questioninput:read-only {
+    width: 72px;
+}
+
+#questioninput:focus {
+    outline: none;
+}
+
+.range {
+    margin-top: 1em;
+    width:100%;
+}
+
+.submit {
+    background-color:inherit;
+    padding: 3% 5%;
+    border: 1.4px solid #4b91a880;
+    color:#4b91a880;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    transition: color ease 300ms, background-color ease 300ms, border ease 300ms;
+}
+
+.submit:hover {
+    border: 1.4px solid #4b91a8;
+    color:#4b91a8;
+    cursor: pointer;
+}
+
+.submit:focus {
+    outline:none;
 }

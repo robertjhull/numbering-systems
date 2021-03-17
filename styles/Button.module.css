@@ -1,7 +1,7 @@
 .button {
-    background-color: #000000;
-    color:#4b91a880;
-    border: 1.4px solid #4b91a880;
+    background-color: inherit;
+    color:#00000050;
+    border: 1.4px solid #00000050;
     padding: 2% 4%;
     border-radius: 6px;
     margin: 4%;
@@ -10,8 +10,9 @@
 }
   
 .button:hover {
-    border: 1.4px solid#4b91a8;
-    color:#4b91a8;
+    border: 1.4px solid #4b91a8;
+    background-color: #4b91a8;
+    color:white;
     cursor: pointer;
 }
   
