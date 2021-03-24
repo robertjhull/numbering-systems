@@ -7,12 +7,13 @@ import '../utils/toRomanNumeral';
 export default function Quiz(props) {
     const router = useRouter();
 
+    const evaluateBool = function(str) {
+        return str === "true" ? true : false; // for switching systems array back to bool
+    }
+
     const amount = Number(router.query.amount) || 15;
-    console.log(amount)
     const range = Number(router.query.range) || 105;
-    console.log(range)
-    const systems = router.query.between || [true, true, true, true, false]
-    console.log(systems)
+    const systems = router.query.between.map(e => evaluateBool(e)) || [true, true, true, true, false]
     const bases = [[2, "BINARY"], [8, "OCTAL"], [10, "DECIMAL"],
                     [16, "HEXADECIMAL"], [0, "ROMAN NUMERAL"]];
 
@@ -22,13 +23,11 @@ export default function Quiz(props) {
 
     useEffect(() => {
         for (let num of initialNumbers) {
-            console.log("looped over", num)
             let from, to; // pick random conversion
             do {
                 from = ~~(Math.random() * 5);
                 to = ~~(Math.random() * 5);
             } while (from === to || !systems[to] || !systems[from])
-    
             let question, answer; // generate questions and answers
             if (from === 4) question = num.toRomanNumeral();
             else question = num.toString(bases[from][0]);
@@ -47,10 +46,28 @@ export default function Quiz(props) {
         }
     }, [])
 
+    const gradeAnswers = function() {
+        let rows = document.getElementsByClassName('answer-key-row');
+        let correct = 0;
+        for (let i = 0; i < rows.length; i++) {
+            let userAnswer = rows[i].lastChild.lastChild;
+            let correctAnswer = questions[i].answer;
+            if (userAnswer.value == correctAnswer) {
+                userAnswer.style.color = "#028b0d";
+                correct++;
+            } else {
+                userAnswer.value = correctAnswer;
+                userAnswer.style.color = "#8b0202";
+            }
+        }
+        const score = String((correct / amount) * 100) + "%";
+        document.getElementById('grade').innerHTML = score;
+    }
 
     return (
         <div>
             {/* Questions */}
+            <h3 id={'grade'}></h3>
             <table id={styles.questionTable}>
                 <tbody>
                     { questions.map((num, index) => (
@@ -91,6 +108,7 @@ export default function Quiz(props) {
                 />
                 <Button 
                     visible={true} 
+                    click={ gradeAnswers }
                     id={"button-results"} 
                     text={"Check Answers"} 
                 />
