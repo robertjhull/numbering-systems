@@ -30,7 +30,7 @@
 
 .navbar ul {
     list-style: none;
-    color: #00000050;
+    color: #ffffff;
     width: 100%;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .navbar ul li a:hover {
-  border-bottom: 1.4px solid #000;
-  color:#000;
+  border-bottom: 1.4px solid #ff0000;
+  color:#ff0000;
   cursor: pointer;
 }

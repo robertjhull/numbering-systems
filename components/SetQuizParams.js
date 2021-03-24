@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router'; 
+import Button from '../components/Button';
 import styles from '../styles/Main.module.css';
 
-export default function Generate() {
+export default function SetQuizParams() {
     const router = useRouter();
 
-    const handleSubmit = () => {
-      if (validateChoices(quiz)) {
+    let [redirect, setRedirect] = useState(false)
+
+    useEffect(() => {
+      if (redirect) {
         router.push({
             pathname: '/quiz',
             query: {
-              quiz: { quiz }
+              amount: quiz.amount,
+              range: quiz.range,
+              between: [quiz.binary, quiz.octal, quiz.decimal, quiz.hex, quiz.roman]
             },
         }, '/quiz', {shallow: true})
-      } else {
-          setStart(false);
-          alert("You must select at least two numbering systems!");
       }
-    }
-
+    }, [redirect])
 
     let [quiz, setQuiz] = useState({
       range: 100,
@@ -32,28 +33,38 @@ export default function Generate() {
 
     const handleQuizChange = (e) => {
       let value, name = e.target.name;
-      if (name in ["amount", "range"]) {
+      if (name === "amount" || name === "range") {
         value = e.target.value;
       } else {
         value = e.target.checked;
       }
-      setQuiz({
+      setQuiz(quiz => ({
         ...quiz,
         [name]: value
-      })
+      }))
+      console.log(quiz)
     }
 
     const validateQuiz = function(quiz) {
-      let atLeastTwoChecked = 0;
-      for (let checkBox in quiz) {
-        if (checkBox === true) atLeastTwoChecked++;
+      let checkedAmount = 0;
+      for (let key in quiz) {
+        if (quiz[key] === true) checkedAmount++;
       }
-      return atLeastTwoChecked >= 2 ? true : false;
+      return checkedAmount >= 2 ? true : false;
+    }
+
+    const handleFormSubmit = (e) => {
+      e.preventDefault();
+      if (validateQuiz(quiz)) {
+        setRedirect(true);
+      } else {
+        alert("You must select at least two numbering systems!");
+      }
     }
 
     return (
         <div>
-          <form onSubmit={ handleSubmit }>
+          <form>
             {/* Set number of questions */}
             <div className={styles.formgroup}>
               <label htmlFor="amount">Number of Questions:</label><br />
@@ -70,11 +81,11 @@ export default function Generate() {
 
             {/* Set range */}
             <div className={styles.formgroup}>
-              <label htmlFor="range">Decimal Range:</label><br />
+              <label htmlFor="range-slider">Decimal Range:</label><br />
               <input 
                 type="number" 
                 id={styles.questioninput} 
-                name="range" 
+                name="range-slider" 
                 defaultValue={quiz.range} 
                 min="15" 
                 max="1000" 
@@ -85,7 +96,7 @@ export default function Generate() {
                 min="15" 
                 max="1000" 
                 defaultValue="100" 
-                name="question-range" 
+                name="range" 
                 id="range" 
                 className={styles.range} 
                 onChange={handleQuizChange}
@@ -148,10 +159,11 @@ export default function Generate() {
 
             {/* Set number of questions */}
             <div className={styles.formgroup}>
-              <button 
-                className={styles.submit} 
-                type="submit"
-              >Generate</button>
+              <Button 
+                visible={true}
+                click={ handleFormSubmit }
+                text={"Start Quiz"}
+              />
             </div>
           </form>
         </div>

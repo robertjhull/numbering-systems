@@ -1,7 +1,5 @@
-.score {
-  margin: 4% 0;
-  line-height: 1.15;
-  font-size: 2rem;
+#questionTable {
+  width: 100%;
 }
 
 .question {
@@ -35,7 +33,7 @@
   border: none;
   border-bottom: 1px solid #c0c0c0;
   font-size: 1.5rem;
-  width: 70%;
+  width: 160px;
   text-align: center;
 }
 
@@ -43,21 +41,18 @@
   outline: none;
 }
 
-.heading {
-  font-size:1.4em;
-  margin: 2%;
-}
-
 .sub {
   font-size: .7em;
 }
 
-.convertArrowCol {
-  width: 30px;
+.questionCol {
+  padding-right: 20px;
+  text-align: left;
 }
 
-.questionCol, .answerCol {
-  width: 150px;
+.answerCol {
+  padding-left: 20px;
+  text-align: right;
 }
 
 .buttons {

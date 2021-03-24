@@ -1,95 +1,83 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Button from '../components/Button';
 import styles from '../styles/Quiz.module.css';
-
-const KEYS = {
-    2: "binary", 
-    8: "octal", 
-    10: "decimal", 
-    16: "hexadecimal"
-}
+import '../utils/toRomanNumeral';
 
 export default function Quiz(props) {
     const router = useRouter();
 
+    const amount = Number(router.query.amount) || 15;
+    console.log(amount)
+    const range = Number(router.query.range) || 105;
+    console.log(range)
+    const systems = router.query.between || [true, true, true, true, false]
+    console.log(systems)
+    const bases = [[2, "BINARY"], [8, "OCTAL"], [10, "DECIMAL"],
+                    [16, "HEXADECIMAL"], [0, "ROMAN NUMERAL"]];
 
-    // Helper functions.
-    function setInnerHTML(id, content) {
-        document.getElementById(id).innerHTML = content;
-    }
+    const initialNumbers = Array(amount).fill().map(() => ~~(Math.random() * range))
+
+    let [questions, setQuestions] = useState([]);
+
+    useEffect(() => {
+        for (let num of initialNumbers) {
+            console.log("looped over", num)
+            let from, to; // pick random conversion
+            do {
+                from = ~~(Math.random() * 5);
+                to = ~~(Math.random() * 5);
+            } while (from === to || !systems[to] || !systems[from])
+    
+            let question, answer; // generate questions and answers
+            if (from === 4) question = num.toRomanNumeral();
+            else question = num.toString(bases[from][0]);
+            if (to === 4) answer = num.toRomanNumeral();
+            else answer = num.toString(bases[to][0]);
+    
+            setQuestions(questions => [
+                ...questions,
+                { 
+                    question: question, 
+                    from: bases[from][1], 
+                    to: bases[to][1], 
+                    answer: answer 
+                }
+            ]);
+        }
+    }, [])
+
 
     return (
         <div>
             {/* Questions */}
-            <table>
+            <table id={styles.questionTable}>
                 <tbody>
-                    <tr className={'answer-key-row'}>
-                        <td className={styles.questionCol}>
-                            <span className={styles.sub}>
-                                <strong>BIN</strong>
-                            </span>{' '}
-                            10110011
-                        </td>
-                        <td className={styles.convertArrowCol}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ff0000" class="bi bi-arrow-right-circle" viewBox="0 0 16 16"><path fillRule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/></svg>
-                        </td>
-                        <td id="answer" className={styles.answerCol}>
-                            <span className={styles.sub}>
-                                <strong>OCT</strong>
-                            </span>{' '}
-                            <input 
-                                id="input-answer" 
-                                className={styles.input}
-                                type="text" 
-                                autoComplete="off"
-                            ></input>
-                        </td>
-                    </tr>
-                    <tr className={'answer-key-row'}>
-                        <td className={styles.questionCol}>
-                            <span className={styles.sub}>
-                                <strong>BIN</strong>
-                            </span>{' '}
-                            10110011
-                        </td>
-                        <td className={styles.convertArrowCol}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ff0000" class="bi bi-arrow-right-circle" viewBox="0 0 16 16"><path fillRule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/></svg>
-                        </td>
-                        <td id="answer" className={styles.answerCol}>
-                            <span className={styles.sub}>
-                                <strong>OCT</strong>
-                            </span>{' '}
-                            <input 
-                                id="input-answer" 
-                                className={styles.input}
-                                type="text" 
-                                autoComplete="off"
-                            ></input>
-                        </td>
-                    </tr>
-                    <tr className={'answer-key-row'}>
-                        <td className={styles.questionCol}>
-                            <span className={styles.sub}>
-                                <strong>BIN</strong>
-                            </span>{' '}
-                            10110011
-                        </td>
-                        <td className={styles.convertArrowCol}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ff0000" class="bi bi-arrow-right-circle" viewBox="0 0 16 16"><path fillRule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/></svg>
-                        </td>
-                        <td id="answer" className={styles.answerCol}>
-                            <span className={styles.sub}>
-                                <strong>OCT</strong>
-                            </span>{' '}
-                            <input 
-                                id="input-answer" 
-                                className={styles.input}
-                                type="text" 
-                                autoComplete="off"
-                            ></input>
-                        </td>
-                    </tr>
+                    { questions.map((num, index) => (
+                        <tr className={'answer-key-row'} key={index}>
+                            <td>
+                                {index + 1}.
+                            </td>
+                            <td className={styles.questionCol}>
+                                <span className={styles.sub}>
+                                    CONVERT{' '}
+                                    { num.from }
+                                </span>{' '}
+                                { num.question }{' '}
+                                <span className={styles.sub}>
+                                    TO{' '}
+                                    { num.to }
+                                </span>
+                            </td>
+                            <td id="answer" className={styles.answerCol}>
+                                <input 
+                                    className={styles.input}
+                                    type="text" 
+                                    autoComplete="off"
+                                ></input>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
 
@@ -102,9 +90,9 @@ export default function Quiz(props) {
                     text={"Go Back"} 
                 />
                 <Button 
-                    visible={false} 
+                    visible={true} 
                     id={"button-results"} 
-                    text={"Submit"} 
+                    text={"Check Answers"} 
                 />
             </div>
         </div>

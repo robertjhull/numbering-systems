@@ -1,13 +1,13 @@
 import Head from 'next/head';
-import Generate from '../components/Generate';
+import SetQuizParams from '../components/SetQuizParams';
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Base Conversion Practice</title>
+        <title>Numbering System Practice</title>
       </Head>
-      <Generate />
+      <SetQuizParams />
     </>
   )
 }

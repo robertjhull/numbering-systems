@@ -7,7 +7,7 @@
 }
 
 .main {
-    padding: 5rem 0;
+    padding: 3rem 0;
     flex: 1;
     width:100%;
     display: flex;
@@ -27,12 +27,12 @@
 
 @media screen and (min-width: 601px) {
     .card {
-        max-width:35%;
+        max-width:60%;
     }
   }
 @media screen and (max-width: 600px) {
     .card {
-        width: 65%;
+        width: 80%;
     }
 }
 
